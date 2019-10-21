@@ -1,0 +1,27 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29230.47
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LeafAndBean", "LeafAndBean\LeafAndBean.csproj", "{787E5297-0B36-40E3-8C77-48265F64D8B4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CA6988AE-F69E-4967-853D-ADFBC2063ECF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{787E5297-0B36-40E3-8C77-48265F64D8B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{787E5297-0B36-40E3-8C77-48265F64D8B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{787E5297-0B36-40E3-8C77-48265F64D8B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{787E5297-0B36-40E3-8C77-48265F64D8B4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {366F18BF-DEE5-4B14-BC13-6D6AFC0F4D08}
+	EndGlobalSection
+EndGlobal

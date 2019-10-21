@@ -1,0 +1,43 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    @Html.Partial("_Header")
+    @RenderSection("metatags", false)
+
+</head>
+
+<body>
+    
+    <h1 class="site-heading text-center text-white d-none d-lg-block">
+        <img src="~/images/MyLogo.png" alt="My Logo" style="width:200px;height:180px;">
+        <span class="site-heading-upper text-primary mb-3">Nullam fringilla sagittis orci vel dignissim</span>
+        <span class="site-heading-lower">Quam tincidunt</span>
+    </h1>
+
+
+    <!-- Navigation -->
+    @Html.Partial("_Navigation")
+    <!-- Navigation -->
+
+    @RenderBody()
+
+
+    
+
+    <footer class="footer text-faded text-center py-5">
+        @Html.Partial("_Footer")
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="~/vendor/jquery/jquery.min.js"></script>
+    <script src="~/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
