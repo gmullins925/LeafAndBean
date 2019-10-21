@@ -13,6 +13,6 @@ namespace LeafAndBean.Data
 			: base(options)
 		{
 		}
-		public DbSet<LeafAndBean.Models.Product> Product { get; set; }
+		public DbSet<LeafAndBean.Models.Product> Products { get; set; }
 	}
 }
