@@ -1,9 +1,14 @@
 ﻿@model IEnumerable<LeafAndBean.Models.Product>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@section metatags
+    { 
+    <meta name="description" content="Index Page" />
+    <meta name="keywords" content="Index Keyword" />
+    }
 
 
 <h2></h2>

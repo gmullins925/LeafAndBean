@@ -14,5 +14,6 @@ namespace LeafAndBean.Data
 		{
 		}
 		public DbSet<LeafAndBean.Models.Product> Products { get; set; }
+		public DbSet<LeafAndBean.Models.Store> Store { get; set; }
 	}
 }
