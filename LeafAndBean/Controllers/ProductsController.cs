@@ -7,16 +7,20 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using LeafAndBean.Data;
 using LeafAndBean.Models;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
+using Microsoft.AspNetCore.Http;
 
 namespace LeafAndBean.Controllers
 {
     public class ProductsController : Controller
     {
         private readonly ApplicationDbContext _context;
-
-        public ProductsController(ApplicationDbContext context)
+		private readonly IHostingEnvironment _env;
+		public ProductsController(ApplicationDbContext context, IHostingEnvironment env)
         {
             _context = context;
+			_env = env;
         }
 
         // GET: Products
@@ -54,8 +58,20 @@ namespace LeafAndBean.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Price,ImagePath")] Product product)
-        {
+        public async Task<IActionResult> Create([Bind("Id,Name,Price,ImagePath")] Product product, IFormFile file)
+		{
+			if (file != null)
+			{
+				var fileName = Path.GetFileName(file.FileName);
+				var path = _env.WebRootPath + "\\uploads\\SQLimages\\" + fileName;
+
+				using (var stream = new FileStream(path, FileMode.Create))
+				{
+					await file.CopyToAsync(stream);
+				}
+				product.ImagePath = "uploads/SQLimages/" + fileName;
+			}
+        
             if (ModelState.IsValid)
             {
                 _context.Add(product);
@@ -81,13 +97,25 @@ namespace LeafAndBean.Controllers
             return View(product);
         }
 
-        // POST: Products/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+		// POST: Products/Edit/5
+		// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+		// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+		[HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Price,ImagePath")] Product product)
-        {
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Price,ImagePath")] Product product, IFormFile file)
+		{
+			if (file != null)
+			{
+				var fileName = Path.GetFileName(file.FileName);
+				var path = _env.WebRootPath + "\\uploads\\SQLimages\\" + fileName;
+
+				using (var stream = new FileStream(path, FileMode.Create))
+				{
+					await file.CopyToAsync(stream);
+				}
+				product.ImagePath = "uploads/SQLimages/" + fileName;
+			}
+        
             if (id != product.Id)
             {
                 return NotFound();
