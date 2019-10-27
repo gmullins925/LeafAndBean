@@ -1,12 +1,86 @@
-﻿@{
-    ViewBag.Title = "Store";
+﻿@model IEnumerable<LeafAndBean.Models.Store>
+
+@{
+    ViewBag.Title = "Locations";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @section metatags
 {
-    <meta name="description" content="Store Page" />
-    <meta name="keywords" content="Store Keyword" />
+    <meta name="description" content="Locations Page" />
+    <meta name="keywords" content="Locations Keyword" />
 }
+
+<style>
+    h2 
+    {
+        color: #2F170F /* Dk Brwn link color */;
+        text-decoration: underline;
+    }
+    table
+    {
+        background-color: #eb8e42;
+    }
+    a
+    {
+        color: #2F170F /* Dk Brwn link color */;
+        text-decoration: underline;
+    }
+
+</style>
+<h2><b>LOCATIONS</b></h2>
+
+<p>
+    <style>
+        
+
+    </style>
+
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.City)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.State)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Zip)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.City)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.State)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Zip)
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
 
 <section class="page-section cta">
     <div class="container">
@@ -67,28 +141,3 @@
     </div>
 </section>
 
-<section class="page-section about-heading">
-    <div class="container">
-        <img class="img-fluid rounded about-heading-img mb-3 mb-lg-0" src="~/images/about.jpg" alt="">
-        <div class="about-heading-content">
-            <div class="row">
-                <div class="col-xl-9 col-lg-10 mx-auto">
-                    <div class="bg-faded rounded p-5">
-                        <h2 class="section-heading mb-4">
-                            <span class="section-heading-upper">Strong Coffee, Strong Roots</span>
-                            <span class="section-heading-lower">About Our Cafe</span>
-                        </h2>
-                        <p>
-                            Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Duis eu quam arcu. Pellentesque a rhoncus quam, sed pharetra dui. Nullam condimentum laoreet ullamcorper. Donec sagittis, nulla.
-                        </p>
-                        <p class="mb-0">
-                            We guarantee that you will fall in
-                            <em>lust</em>
-                            with our decadent blends the moment you walk inside until you finish your last sip. Join us for your daily routine, an outing with friends, or simply just to enjoy some alone time.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
