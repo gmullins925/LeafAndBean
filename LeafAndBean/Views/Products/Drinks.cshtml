@@ -1,0 +1,68 @@
+﻿@model IEnumerable<LeafAndBean.Models.Product>
+
+@{
+    ViewBag.Title = "Drinks";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section metatags
+    {
+    <meta name="description" content="Drinks Page" />
+    <meta name="keywords" content="Drinks Keyword" />
+}
+
+
+<style>
+    h2 {
+        color: #2F170F /* Dk Brwn link color */;
+        text-decoration: underline;
+    }
+
+    table {
+        background-color: #DFA23E;
+    }
+
+    a {
+        color: #2F170F /* Dk Brwn link color */;
+        text-decoration: underline;
+    }
+</style>
+<h2><b>DRINKS</b></h2>
+
+<p>
+    <style>
+    </style>
+
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ImagePath)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    <img src="../../@Html.DisplayFor(modelItem => item.ImagePath)" height="100" width="100" />
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>

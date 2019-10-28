@@ -1,4 +1,7 @@
-﻿<nav class="navbar navbar-expand-lg navbar-dark py-lg-4" id="mainNav">
+﻿@using Microsoft.AspNetCore.Identity;
+@inject SignInManager<IdentityUser> signInManager;
+
+<nav class="navbar navbar-expand-lg navbar-dark py-lg-4" id="mainNav">
     <div class="container">
         <a class="navbar-brand text-uppercase text-expanded font-weight-bold d-lg-none" href="~/Home/Index">Leaf & Bean<img src="~/images/MyLogo.png" alt="My Logo" style="width:200px;height:180px;"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -7,25 +10,43 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav mx-auto">
                 <li class="nav-item active px-lg-4">
-                    <a class="nav-link text-uppercase text-expanded" href="~/Home/Index">Home
-                        <span class="sr-only">(current)</span>
+                    <a class="nav-link text-uppercase text-expanded" href="~/Home/Index">
+                        Home
+                        
                     </a>
                 </li>
                 <li class="nav-item px-lg-4">
                     <a class="nav-link text-uppercase text-expanded" href="~/Home/About">About</a>
                 </li>
                 <li class="nav-item px-lg-4">
-                    <a class="nav-link text-uppercase text-expanded" href="~/Home/Products">Products</a>
+                    <a class="nav-link text-uppercase text-expanded" href="~/Products/Drinks">Products</a>
                 </li>
                 <li class="nav-item px-lg-4">
-                    <a class="nav-link text-uppercase text-expanded" href="~/Home/Store">Store Hours / Locations</a>
+                    <a class="nav-link text-uppercase text-expanded" href="~/Home/Locations">Hours/Locations</a>
                 </li>
 
             </ul>
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item px-lg-4">
-                    <a class="nav-link text-uppercase text-expanded" href="~/Account/Register">Account Login</a>
-                </li>
+                @if (signInManager.IsSignedIn(User))
+                {
+                    <li class="nav-item px-lg-4">
+                        <form method="post" asp-action="logout" asp-controller="account">
+                            <button type="submit" class="btn btn-primary py-0"
+                                    style="width:auto">
+                                Logout @User.Identity.Name
+                            </button>
+                        </form>
+                    </li>
+                }
+                else
+                {
+                    <li class="nav-item px-lg-4">
+                        <a class="nav-link text-uppercase text-expanded" href="~/Account/Register">Register</a>
+                    </li>
+                    <li class="nav-item px-lg-4">
+                        <a class="nav-link text-uppercase text-expanded" href="~/Home/Login">Login</a>
+                    </li>
+                }
             </ul>
         </div>
     </div>
