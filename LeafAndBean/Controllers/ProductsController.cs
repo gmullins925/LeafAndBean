@@ -10,6 +10,7 @@ using LeafAndBean.Models;
 using Microsoft.AspNetCore.Hosting;
 using System.IO;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LeafAndBean.Controllers
 {
@@ -23,8 +24,9 @@ namespace LeafAndBean.Controllers
 			_env = env;
         }
 
-        // GET: Products
-        public async Task<IActionResult> Index()
+		// GET: Products
+		[Authorize]
+		public async Task<IActionResult> Index()
         {
             return View(await _context.Products.ToListAsync());
         }
@@ -51,8 +53,9 @@ namespace LeafAndBean.Controllers
             return View(product);
         }
 
-        // GET: Products/Create
-        public IActionResult Create()
+		// GET: Products/Create
+		[Authorize]
+		public IActionResult Create()
         {
             return View();
         }
@@ -62,7 +65,8 @@ namespace LeafAndBean.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Price,ImagePath")] Product product, IFormFile file)
+		[Authorize]
+		public async Task<IActionResult> Create([Bind("Id,Name,Price,ImagePath")] Product product, IFormFile file)
 		{
 			if (file != null)
 			{
@@ -85,8 +89,9 @@ namespace LeafAndBean.Controllers
             return View(product);
         }
 
-        // GET: Products/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+		// GET: Products/Edit/5
+		[Authorize]
+		public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
@@ -106,7 +111,8 @@ namespace LeafAndBean.Controllers
 		// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Price,ImagePath")] Product product, IFormFile file)
+		[Authorize]
+		public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Price,ImagePath")] Product product, IFormFile file)
 		{
 			if (file != null)
 			{
@@ -148,8 +154,9 @@ namespace LeafAndBean.Controllers
             return View(product);
         }
 
-        // GET: Products/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+		// GET: Products/Delete/5
+		[Authorize]
+		public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
@@ -169,7 +176,8 @@ namespace LeafAndBean.Controllers
         // POST: Products/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+		[Authorize]
+		public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var product = await _context.Products.FindAsync(id);
             _context.Products.Remove(product);

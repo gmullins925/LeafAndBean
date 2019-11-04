@@ -10,7 +10,17 @@
     <meta name="keywords" content="Details Keyword" />
 }
 
-    <h2>Details</h2>
+<style>
+    div {
+        padding-left: 50px;
+    }
+    h2{
+        padding-left: 50px;
+    }
+</style>
+    
+<h2>Details</h2>
+
 
     <div>
         <h4>Product</h4>
@@ -32,7 +42,7 @@
                 @Html.DisplayNameFor(model => model.ImagePath)
             </dt>
             <dd>
-                @Html.DisplayFor(model => model.ImagePath)
+                <img src="../../@Html.DisplayFor(model => model.ImagePath)" height="100" width="100" />
             </dd>
         </dl>
     </div>

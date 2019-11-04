@@ -1,6 +1,32 @@
 ﻿@using Microsoft.AspNetCore.Identity;
 @inject SignInManager<IdentityUser> signInManager;
 
+<style>
+    .myButton {
+	box-shadow:inset 0px 1px 0px 0px #a3807c;
+	background:linear-gradient(to bottom, #7d5d3b 5%, #ad8a64 100%);
+	background-color:#7d5d3b;
+	border-radius:3px;
+	border:1px solid #54381e;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	/*font-family:Arial;
+	font-size:13px;*/
+	padding:6px 24px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #4d3534;
+}
+.myButton:hover {
+	background:linear-gradient(to bottom, #ad8a64 5%, #7d5d3b 100%);
+	background-color:#ad8a64;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}
+</style>
+
 <nav class="navbar navbar-expand-lg navbar-dark py-lg-4" id="mainNav">
     <div class="container">
         <a class="navbar-brand text-uppercase text-expanded font-weight-bold d-lg-none" href="~/Home/Index">Leaf & Bean<img src="~/images/MyLogo.png" alt="My Logo" style="width:200px;height:180px;"></a>
@@ -29,6 +55,7 @@
             <ul class="navbar-nav ml-auto">
                 @if (signInManager.IsSignedIn(User))
                 {
+                <ol>
                     <li class="nav-item px-lg-4">
                         <form method="post" asp-action="logout" asp-controller="account">
                             <button type="submit" class="btn btn-primary py-0"
@@ -37,14 +64,16 @@
                             </button>
                         </form>
                     </li>
+                    <li class="nav-item px-lg-4" style="text-align:center">
+                        <a class="nav-link text-uppercase text-expanded" href="~/Identity/Account/Manage">My Account</a>
+                    </li>
+                </ol>
                 }
                 else
                 {
+
                     <li class="nav-item px-lg-4">
-                        <a class="nav-link text-uppercase text-expanded" href="~/Identity/Account/Register">Register</a>
-                    </li>
-                    <li class="nav-item px-lg-4">
-                        <a class="nav-link text-uppercase text-expanded" href="~/Identity/Account/Login">Login</a>
+                        <a href="~/Identity/Account/Login" class="myButton">Login</a>
                     </li>
                 }
             </ul>

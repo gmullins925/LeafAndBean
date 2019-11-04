@@ -7,26 +7,28 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using LeafAndBean.Data;
 using LeafAndBean.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LeafAndBean.Controllers
 {
-    public class StoresController : Controller
-    {
-        private readonly ApplicationDbContext _context;
+	public class StoresController : Controller
+	{
+		private readonly ApplicationDbContext _context;
 
-        public StoresController(ApplicationDbContext context)
-        {
-            _context = context;
-        }
+		public StoresController(ApplicationDbContext context)
+		{
+			_context = context;
+		}
 
-        // GET: Stores
-        public async Task<IActionResult> Index()
+		// GET: Stores
+		[Authorize]
+		public async Task<IActionResult> Index()
         {
             return View(await _context.Store.ToListAsync());
         }
 
-        // GET: Stores/Details/5
-        public async Task<IActionResult> Details(int? id)
+		// GET: Stores/Details/5
+		public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
@@ -44,6 +46,7 @@ namespace LeafAndBean.Controllers
         }
 
         // GET: Stores/Create
+		[Authorize]
         public IActionResult Create()
         {
             return View();
@@ -54,6 +57,7 @@ namespace LeafAndBean.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+		[Authorize]
         public async Task<IActionResult> Create([Bind("Id,Name,Address,City,State,Zip")] Store store)
         {
             if (ModelState.IsValid)
@@ -66,6 +70,7 @@ namespace LeafAndBean.Controllers
         }
 
         // GET: Stores/Edit/5
+		[Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -86,6 +91,7 @@ namespace LeafAndBean.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+		[Authorize]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Address,City,State,Zip")] Store store)
         {
             if (id != store.Id)
@@ -117,6 +123,7 @@ namespace LeafAndBean.Controllers
         }
 
         // GET: Stores/Delete/5
+		[Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -137,6 +144,7 @@ namespace LeafAndBean.Controllers
         // POST: Stores/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+		[Authorize]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var store = await _context.Store.FindAsync(id);
