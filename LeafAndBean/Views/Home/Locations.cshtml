@@ -11,31 +11,42 @@
 }
 
 <style>
-    h2 
-    {
-        color: #2F170F /* Dk Brwn link color */;
-        text-decoration: underline;
-    }
-    table
-    {
-        background-color: #DFA23E;
-    }
-    a
-    {
+    h2 {
         color: #2F170F /* Dk Brwn link color */;
         text-decoration: underline;
     }
 
+    table {
+        background-color: #DFA23E;
+    }
+
+    r {
+        background-color: none;
+    }
+
+    a {
+        color: #2F170F /* Dk Brwn link color */;
+        text-decoration: underline;
+    }
 </style>
 <h2><b>LOCATIONS</b></h2>
 
 <p>
     <style>
-        
-
     </style>
 
 </p>
+<table width: 100%>
+
+    <tr>
+        <td><center><a href=#>Directions</a></center></td>
+        <td> | </td>
+        <td><center><a href="https://goo.gl/maps/V7rAQwEfNJ6yKEgEA" target="_blank">The Star</a></center></td>
+        <td> | </td>
+        <td><center><a href="https://goo.gl/maps/QJvrG22361FHEF2M6" target="_blank">Legacy West</a></center></td>
+    </tr>
+</table>
+<br />
 <table class="table">
     <thead>
         <tr>
@@ -76,9 +87,14 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Zip)
                 </td>
-
+                <td>
             </tr>
+            <tr></tr>
+
         }
+
+
+
     </tbody>
 </table>
 

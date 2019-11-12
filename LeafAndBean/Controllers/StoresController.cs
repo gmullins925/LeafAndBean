@@ -21,13 +21,14 @@ namespace LeafAndBean.Controllers
 		}
 
 		// GET: Stores
-		[Authorize]
+		[Authorize(Roles = "Admin")]
 		public async Task<IActionResult> Index()
         {
             return View(await _context.Store.ToListAsync());
         }
 
 		// GET: Stores/Details/5
+		[Authorize(Roles = "Admin")]
 		public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -45,9 +46,9 @@ namespace LeafAndBean.Controllers
             return View(store);
         }
 
-        // GET: Stores/Create
-		[Authorize]
-        public IActionResult Create()
+		// GET: Stores/Create
+		[Authorize(Roles = "Admin")]
+		public IActionResult Create()
         {
             return View();
         }
@@ -57,8 +58,8 @@ namespace LeafAndBean.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-		[Authorize]
-        public async Task<IActionResult> Create([Bind("Id,Name,Address,City,State,Zip")] Store store)
+		[Authorize(Roles = "Admin")]
+		public async Task<IActionResult> Create([Bind("Id,Name,Address,City,State,Zip")] Store store)
         {
             if (ModelState.IsValid)
             {
@@ -69,9 +70,9 @@ namespace LeafAndBean.Controllers
             return View(store);
         }
 
-        // GET: Stores/Edit/5
-		[Authorize]
-        public async Task<IActionResult> Edit(int? id)
+		// GET: Stores/Edit/5
+		[Authorize(Roles = "Admin")]
+		public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
@@ -91,8 +92,8 @@ namespace LeafAndBean.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-		[Authorize]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Address,City,State,Zip")] Store store)
+		[Authorize(Roles = "Admin")]
+		public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Address,City,State,Zip")] Store store)
         {
             if (id != store.Id)
             {
@@ -122,9 +123,9 @@ namespace LeafAndBean.Controllers
             return View(store);
         }
 
-        // GET: Stores/Delete/5
-		[Authorize]
-        public async Task<IActionResult> Delete(int? id)
+		// GET: Stores/Delete/5
+		[Authorize(Roles = "Admin")]
+		public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
@@ -144,8 +145,8 @@ namespace LeafAndBean.Controllers
         // POST: Stores/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-		[Authorize]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+		[Authorize(Roles = "Admin")]
+		public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var store = await _context.Store.FindAsync(id);
             _context.Store.Remove(store);

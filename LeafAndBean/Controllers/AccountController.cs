@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using LeafAndBean.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,6 +22,12 @@ namespace LeafAndBean.Controllers
 			this.userManager = userManager;
 			this.signInManager = signInManager;
 		}
+		[Authorize(Roles = "Admin")]
+		public IActionResult Index()
+		{
+			return View(userManager.Users);
+		}
+
 
 		public async Task<IActionResult> Logout()
 		{
@@ -52,7 +59,7 @@ namespace LeafAndBean.Controllers
 					ModelState.AddModelError("", error.Description);
 				}
 			}
-			return View();
+			return View(model);
 		}
 
 		public IActionResult Login()

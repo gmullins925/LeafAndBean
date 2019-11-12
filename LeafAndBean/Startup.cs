@@ -12,6 +12,8 @@ using Microsoft.EntityFrameworkCore;
 using LeafAndBean.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using MailSenderApp.Services;
 
 namespace LeafAndBean
 {
@@ -34,13 +36,33 @@ namespace LeafAndBean
 				options.MinimumSameSitePolicy = SameSiteMode.None;
 			});
 
+			services.ConfigureApplicationCookie(options =>
+			{
+				// Cookie settings
+				options.Cookie.HttpOnly = true;
+				options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+
+				options.LoginPath = "/Identity/Account/Login"; // Set here your login path.
+				options.AccessDeniedPath = "/Identity/Account/AccessDenied"; // set here your access denied path.
+				options.SlidingExpiration = true;
+			});
+
 			services.AddDbContext<ApplicationDbContext>(options =>
 				options.UseSqlServer(
 					Configuration.GetConnectionString("DefaultConnection")));
-			services.AddDefaultIdentity<IdentityUser>()
-				.AddEntityFrameworkStores<ApplicationDbContext>();
+			services.AddIdentity<IdentityUser, IdentityRole>()
+				.AddRoles<IdentityRole>()
+				.AddEntityFrameworkStores<ApplicationDbContext>()
+				.AddDefaultTokenProviders();
 
-			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+			services.AddTransient<IEmailSender, EmailSender>();
+
+			services.AddMvc().AddRazorPagesOptions(options => {
+				options.Conventions.AddAreaPageRoute("Identity", "/Account/Login", "/Account/Login");
+			}).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+			services.AddScoped<IUserClaimsPrincipalFactory<IdentityUser>, UserClaimsPrincipalFactory<IdentityUser, IdentityRole>>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
